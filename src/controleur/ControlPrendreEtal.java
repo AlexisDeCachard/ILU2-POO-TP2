@@ -25,4 +25,10 @@ public class ControlPrendreEtal {
 	public boolean verifierIdentite(String nomVendeur) {
 		return controlVerifierIdentite.verifierIdentite(nomVendeur);
 	}
+	
+	public boolean vendeurDejaSurMarche(String nomVendeur) {
+		return village.rechercherEtal(village.trouverHabitant(nomVendeur))!=null && village.rechercherEtal(village.trouverHabitant(nomVendeur)).isEtalOccupe();
+	}
+	
+
 }

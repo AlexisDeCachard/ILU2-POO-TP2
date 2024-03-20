@@ -9,7 +9,7 @@ public class ControlLibererEtal {
 	}
 	
 	public boolean isVendeur(String nomVendeur) {
-		return controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur)!=null;
+		return controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur)!=null && controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur).isEtalOccupe();
 	}
 
 	/**
@@ -23,6 +23,7 @@ public class ControlLibererEtal {
 	public String[] libererEtal(String nomVendeur) {
 		String[] donneesEtal = new String[5];
 		donneesEtal=controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur).etatEtal();
+		controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur).libererEtal();
 		return donneesEtal;
 	}
 
