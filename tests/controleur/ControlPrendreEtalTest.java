@@ -25,43 +25,47 @@ class ControlPrendreEtalTest {
 		controlVerifierIdentite= new ControlVerifierIdentite(village);
 		control = new ControlPrendreEtal(controlVerifierIdentite,village);
 		controlEmmenager = new ControlEmmenager(village);
+		for (int i = 0; i < 4; i++) {
+			controlEmmenager.ajouterGaulois("a-" + i, 7);
+			control.prendreEtal("a-" + i, "f", 10);
+		}
+		controlEmmenager.ajouterGaulois("Astérix", 3);
 	}
 
 	@Test
 	void testControlPrendreEtal() {
-		assertNotNull(controlEmmenager,"Constructeur ne renvoie pas null");
+		assertNotNull(control,"Constructeur ne renvoie pas null");
 	}
 
 	@Test
 	void testResteEtals() {
 		assertTrue(control.resteEtals());
-		for (int i = 0; i < 5; i++) {
-			Gaulois gaulois=new Gaulois("a-" + i, 7);
-			village.installerVendeur(gaulois, "fleurs", 5);
-		}
+		control.prendreEtal("Astérix", "f", 10);
 		assertFalse(control.resteEtals());
 	}
 
 	@Test
 	void testPrendreEtal() {
-		fail("not implemented");
+		controlEmmenager.ajouterGaulois("Obélix", 20);
+		control.prendreEtal("Astérix", "f", 10);
+		control.prendreEtal("Obélix", "f", 10);
+		assertNotEquals(village.rechercherEtal(village.trouverHabitant("Astérix")),null);
+		assertEquals(village.rechercherEtal(village.trouverHabitant("Obélix")),null);
 	}
 
 	@Test
 	void testVerifierIdentite() {
-		controlEmmenager.ajouterGaulois("Astérix", 7);
 		assertTrue(control.verifierIdentite("Astérix"));
 		assertFalse(control.verifierIdentite("A"));
 	}
 
 	@Test
 	void testVendeurDejaSurMarche() {
+		assertFalse(control.vendeurDejaSurMarche("A"));
 		assertFalse(control.vendeurDejaSurMarche("Astérix"));
-		controlEmmenager.ajouterGaulois("Astérix", 3);
-		Gaulois gaulois=new Gaulois("Astérix",3);
-		village.installerVendeur(gaulois, "fleurs", 20);
+		control.prendreEtal("Astérix", "fleurs", 20);
 		assertTrue(control.vendeurDejaSurMarche("Astérix"));
-		village.partirVendeur(gaulois);
+		village.partirVendeur(village.trouverHabitant("Astérix"));
 		assertFalse(control.vendeurDejaSurMarche("Astérix"));
 	}
 

@@ -35,9 +35,14 @@ public class ControlAcheterProduit {
 	}
 	
 	public int[] acheterEtalVendeur(String nomVendeur, int quantiteAcheter) {
+		int[] resultat=new int[2];
+		if (controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur)==null) {
+			resultat[0]=-1;
+			resultat[1]=-1;
+			return resultat;
+		}
 		int quantite=controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur).getQuantite();
 		int achat=controlTrouverEtalVendeur.trouverEtalVendeur(nomVendeur).acheterProduit(quantiteAcheter);
-		int[] resultat=new int[2];
 		resultat[0]=quantite;
 		resultat[1]=achat;
 		return resultat;

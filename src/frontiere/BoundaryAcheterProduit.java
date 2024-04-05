@@ -46,6 +46,9 @@ public class BoundaryAcheterProduit {
 			System.out.println("Bonjour " + nomAcheteur + "!");
 			int quantiteAcheter=Clavier.entrerEntier("Combien de " + produit + " voulez-vous acheter ?");
 			int[] resultatVente=controlAcheterProduit.acheterEtalVendeur(nomVendeur, quantiteAcheter);
+			if (resultatVente[1]==-1 && resultatVente[0]==-1) {
+				System.out.println(nomAcheteur + " veut acheter " + quantiteAcheter + " " + produit + ", mais " + nomVendeur + " n'est pas un vendeur!");
+			}
 			if (resultatVente[1]==0) {
 				System.out.println(nomAcheteur + " veut acheter " + quantiteAcheter + " " + produit + ", malheureusement il n'y en a plus !");
 			} else {

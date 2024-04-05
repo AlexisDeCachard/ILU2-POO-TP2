@@ -173,12 +173,14 @@ public class Village {
 		private Etal trouverVendeur(Gaulois gaulois) {
 			boolean vendeurTrouve = false;
 			Etal etalVendeur = null;
-			for (int i = 0; i < etals.length && !vendeurTrouve; i++) {
-				Gaulois vendeur = etals[i].getVendeur();
-				if (vendeur != null) {
-					vendeurTrouve = vendeur.getNom().equals(gaulois.getNom());
-					if (vendeurTrouve) {
-						etalVendeur = etals[i];
+			if (gaulois!=null) {
+				for (int i = 0; i < etals.length && !vendeurTrouve; i++) {
+					Gaulois vendeur = etals[i].getVendeur();
+					if (vendeur != null) {
+						vendeurTrouve = vendeur.getNom().equals(gaulois.getNom());
+						if (vendeurTrouve) {
+							etalVendeur = etals[i];
+						}
 					}
 				}
 			}
